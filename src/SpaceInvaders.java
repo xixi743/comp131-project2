@@ -20,6 +20,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/*
+Space invader requirements:
+    the player must control a ship that moves left and right at the bottom of the screen
+    the player must also be able to use the ship to fire projectiles at the enemy
+    there must be a grid of aliens that move left and right, and that moves down towards the payer over time
+    the aliens must randomly fire projectiles at the player
+    if a player-fired projectile touches an alien, the alien must be removed
+    if an alien-fired projectile touches the player, the player loses
+    if an alien touches the player, the player loses
+    if an alien gets past the bottom of the screen, the player loses
+    if all aliens are destroyed the player wins
+    there must be end screens when the player wins and loses
+ */
+
 public class SpaceInvaders extends JPanel implements ActionListener, KeyListener, Runnable {
 
     private final int canvasWidth;
