@@ -1,13 +1,9 @@
 // utility
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 // graphics
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Graphics;
 
 // events
 import java.awt.event.ActionEvent;
@@ -44,6 +40,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private final int msPerFrame = 1000 / framesPerSecond;
     private Timer timer;
     private int frame = 0;
+    private ArrayList<Shape> objects;
 
     // FIXME list your game objects here
 
@@ -55,6 +52,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.canvasHeight = 400;
         this.backgroundColor = Color.WHITE;
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
+        this.objects = new ArrayList<Shape>();
+
 
         // set the drawing timer
         this.timer = new Timer(msPerFrame, this);
@@ -208,11 +207,13 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      * @param g The Graphics for the JPanel
      */
     private void paintLoseScreen(Graphics g) {
-        // FIXME draw the game over screen here
-    }
+        // FIX ME
+        SpaceInvaders.addObject (new LosingEndScreen(0,0);
+        }
 
     public static void main(String[] args) {
         SpaceInvaders invaders = new SpaceInvaders();
         EventQueue.invokeLater(invaders);
+
     }
 }
