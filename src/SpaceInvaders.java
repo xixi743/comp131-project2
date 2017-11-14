@@ -41,6 +41,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private Timer timer;
     private int frame = 0;
     private ArrayList<Shape> objects;
+    private LosingEndScreen gameover;
+    private UserSpaceship userspaceship;
 
     // FIXME list your game objects here
 
@@ -53,6 +55,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.backgroundColor = Color.WHITE;
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
+        this.gameover = new LosingEndScreen();
+        this.userspaceship = new UserSpaceship();
 
 
         // set the drawing timer
@@ -208,7 +212,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void paintLoseScreen(Graphics g) {
         // FIX ME
-        SpaceInvaders.addObject (new LosingEndScreen(0,0);
+        new LosingEndScreen(0,0);
         }
 
     public static void main(String[] args) {
