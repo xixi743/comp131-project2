@@ -14,7 +14,6 @@ public class LosingEndScreen extends GraphicsObject {
         g.fillRect(0,0,600,400);
 
         //GAME OVER
-        //FIX ME ---- Make sure to smooth out all the letters after doing the math
         //the letter G
         g.setColor(new Color(59, 229, 96));
         g.fillRect(97, 81, 81, 16); //section 1
