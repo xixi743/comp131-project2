@@ -73,7 +73,7 @@ public class LosingEndScreen extends GraphicsObject {
         g.fillRect(486, 210, 65, 16); //section 2
         g.fillRect(535, 226, 32, 50); //section 3
         g.fillRect(486, 276, 49, 16); //section 4
-        g.fillRect(519, 259, 16, 17s); //section 5
+        g.fillRect(519, 259, 16, 17); //section 5
         g.fillRect(503, 292, 49, 16); //section 6
         g.fillRect(519, 308, 49, 16); //section 7
     }
