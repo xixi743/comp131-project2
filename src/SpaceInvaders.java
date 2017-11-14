@@ -55,8 +55,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.backgroundColor = Color.WHITE;
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
-        this.gameover = new LosingEndScreen();
-        this.userspaceship = new UserSpaceship();
+        this.gameover = new LosingEndScreen(0, 0);
+        this.userspaceship = new UserSpaceship(0, 0);
 
 
         // set the drawing timer
@@ -212,6 +212,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void paintLoseScreen(Graphics g) {
         // FIX ME
+        this.gameover.draw(g);
         new LosingEndScreen(0,0);
         }
 
