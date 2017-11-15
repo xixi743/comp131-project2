@@ -44,6 +44,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private LosingEndScreen gameover;
     private UserSpaceship userspaceship;
     private Enemies enemies;
+    private Projectile projectile;
+    private ArrayList<Projectile> projectiles;
 
     // FIXME list your game objects here
 
@@ -57,8 +59,12 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
         this.gameover = new LosingEndScreen(0, 0);
+        this.userspaceship = new UserSpaceship(300, 380);
+        this.projectile = new Projectile(this.userspaceship.x, this.userspaceship.y - 21);
         this.userspaceship = new UserSpaceship(0, 0);
         this.enemies = new Enemies(0,0);
+
+
 
 
         // set the drawing timer
@@ -162,10 +168,13 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            this.userspaceship.x -= 5;
             // FIXME what happens when left arrow is pressed
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            this.userspaceship.x += 5;
             // FIXME what happens when right arrow is pressed
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//            this.projectile = new Projectile(this.userspaceship.x, this.userspaceship.y - 21);
             // FIXME what happens when space bar is pressed
         }
     }
@@ -173,6 +182,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     /* Update the game objects
      */
     private void update() {
+        this.userspaceship.update(this.canvasWidth, this.canvasHeight, this.frame);
+        this.projectile.update(this.canvasWidth, this.canvasHeight, this.frame);
         // FIXME update game objects here
     }
 
@@ -197,6 +208,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      * @param g The Graphics for the JPanel
      */
     private void paintGameScreen(Graphics g) {
+        this.userspaceship.draw(g);
+        this.projectile.draw(g);
         // FIXME draw game objects here
         this.userspaceship.draw(g);
         this.enemies.draw(g);
