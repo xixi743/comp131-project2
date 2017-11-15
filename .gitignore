@@ -1,6 +1,9 @@
 
 \.idea/
+<<<<<<< Updated upstream
 
 *.class
 
 SpaceInvaders\.iml
+=======
+>>>>>>> Stashed changes
