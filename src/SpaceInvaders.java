@@ -1,4 +1,6 @@
 // utility
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,21 +63,11 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.userspaceship = new UserSpaceship(280, 380);
         this.shots = new ArrayList<Projectile>();
         this.badGuys = new ArrayList<Enemies>();
-        int enemySpawnX = 60;
-        int enemySpawnY = 100;
-/*        while (enemySpawnX <= 600) {
-            while (enemySpawnY <= 400) {
-                this.badGuys.add(new Enemies(enemySpawnX, enemySpawnY));
-                enemySpawnY += 100;
-            }
-            enemySpawnX += 60;
-        }*/
         for (int column = 0; column < 10; column++) {
             for (int row = 0; row < 4; row++) {
                 this.badGuys.add(new Enemies(55 * column + 30,50 * row + 25));
             }
         }
-        //this.badGuys.add(new Enemies(100,100));
 
 
         // set the drawing timer
@@ -183,7 +175,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             this.userspaceship.x += 10;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            shots.add(new Projectile(this.userspaceship.x, this.userspaceship.y - 21));
+            this.shots.add(new Projectile(this.userspaceship.x, this.userspaceship.y - 21));
         }
     }
 
@@ -191,22 +183,30 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void update() {
         this.userspaceship.update(this.canvasWidth, this.canvasHeight, this.frame);
-        for (Projectile projectiles : this.shots){
-            projectiles.update(this.canvasWidth, this.canvasHeight, this.frame);
-        }
+        for (int i = 0; i < this.shots.size(); i+=1) {
+            Projectile projectile = this.shots.get(i);
+            projectile.update(this.canvasWidth, this.canvasHeight, this.frame);
+            if (projectile.check() == true){
+                this.shots.remove(i);
+            }
         for (Enemies enemies : this.badGuys){
             enemies.update(this.canvasWidth, this.canvasHeight, this.frame);
         }
+        destroyEnemy();
         // FIXME update game objects here
+        }
     }
 
-   /* private void destroyEnemy() {
-        for (Projectile projectile : this.shots) {
-            if (projectile.y == this.enemies.y) {
-
+   private void destroyEnemy() {
+        for (int projectileIndex = 0; projectileIndex < this.shots.size(); projectileIndex++) {
+            for (int badGuyIndex = 0; badGuyIndex < this.badGuys.size(); badGuyIndex++) {
+                if (((this.shots.get(projectileIndex).y < this.badGuys.get(badGuyIndex).y + 5) && (this.shots.get(projectileIndex).y > this.badGuys.get(badGuyIndex).y))
+                        && ((this.shots.get(projectileIndex).x < this.badGuys.get(badGuyIndex).x + 15) && (this.shots.get(projectileIndex).x > this.badGuys.get(badGuyIndex).x - 15))) {
+                    this.badGuys.remove(badGuyIndex);
+                }
             }
         }
-    }*/
+    }
 
     /* Check if the player has lost the game
      *
