@@ -12,10 +12,9 @@ public class Projectile extends GraphicsObject {
         g.setColor(new Color(19, 219, 43));
         g.fillRect(this.x, this.y, 20, 20);
     }
-    public void fire () {
-        while (this.y < 0) {
-            this.y -= 5;
+
+    //overriding with this.y change
+    public void update(int pic_width, int pic_height, int frame) {
+        this.y -= 5;
         }
     }
-
-}
