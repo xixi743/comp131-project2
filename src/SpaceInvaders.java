@@ -43,6 +43,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private ArrayList<Shape> objects;
     private LosingEndScreen gameover;
     private UserSpaceship userspaceship;
+    private Enemies enemies;
 
     // FIXME list your game objects here
 
@@ -57,6 +58,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.objects = new ArrayList<Shape>();
         this.gameover = new LosingEndScreen(0, 0);
         this.userspaceship = new UserSpaceship(0, 0);
+        this.enemies = new Enemies(0,0);
 
 
         // set the drawing timer
@@ -196,6 +198,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void paintGameScreen(Graphics g) {
         // FIXME draw game objects here
+        this.userspaceship.draw(g);
+        this.enemies.draw(g);
     }
 
     /* Paint the screen when the player has won
