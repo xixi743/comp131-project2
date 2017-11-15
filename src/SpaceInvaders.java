@@ -44,7 +44,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private LosingEndScreen gameover;
     private UserSpaceship userspaceship;
     private ArrayList<Projectile> shots;
-    private ArrayList<Enemies> enemies;
+    private ArrayList<Enemies> badGuys;
 
     // FIXME list your game objects here
 
@@ -58,10 +58,24 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
         this.gameover = new LosingEndScreen(0, 0);
-        this.userspaceship = new UserSpaceship(300, 380);
+        this.userspaceship = new UserSpaceship(280, 380);
         this.shots = new ArrayList<Projectile>();
-        this.enemies = new ArrayList<Enemies>();
-        enemies.add(new Enemies(0,0));
+        this.badGuys = new ArrayList<Enemies>();
+        int enemySpawnX = 60;
+        int enemySpawnY = 100;
+/*        while (enemySpawnX <= 600) {
+            while (enemySpawnY <= 400) {
+                this.badGuys.add(new Enemies(enemySpawnX, enemySpawnY));
+                enemySpawnY += 100;
+            }
+            enemySpawnX += 60;
+        }*/
+        for (int column = 0; column < 10; column++) {
+            for (int row = 0; row < 4; row++) {
+                this.badGuys.add(new Enemies(55 * column + 30,50 * row + 25));
+            }
+        }
+        //this.badGuys.add(new Enemies(100,100));
 
 
         // set the drawing timer
@@ -180,7 +194,9 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         for (Projectile projectiles : this.shots){
             projectiles.update(this.canvasWidth, this.canvasHeight, this.frame);
         }
-        
+        for (Enemies enemies : this.badGuys){
+            enemies.update(this.canvasWidth, this.canvasHeight, this.frame);
+        }
         // FIXME update game objects here
     }
 
@@ -217,7 +233,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         for (Projectile projectiles : this.shots){
             projectiles.draw(g);
         }
-        for (Enemies enemies : this.enemies);{
+        for (Enemies enemies : this.badGuys){
             enemies.draw(g);
         }
         // FIXME draw game objects here
