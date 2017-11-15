@@ -1,4 +1,6 @@
 // utility
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,7 +46,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private LosingEndScreen gameover;
     private UserSpaceship userspaceship;
     private ArrayList<Projectile> shots;
-    private ArrayList<Enemies> enemies;
+    private ArrayList<Enemies> badGuys;
 
     // FIXME list your game objects here
 
@@ -58,10 +60,14 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
         this.gameover = new LosingEndScreen(0, 0);
-        this.userspaceship = new UserSpaceship(300, 380);
+        this.userspaceship = new UserSpaceship(280, 380);
         this.shots = new ArrayList<Projectile>();
-        this.enemies = new ArrayList<Enemies>();
-        enemies.add(new Enemies(0,0));
+        this.badGuys = new ArrayList<Enemies>();
+        for (int column = 0; column < 10; column++) {
+            for (int row = 0; row < 4; row++) {
+                this.badGuys.add(new Enemies(55 * column + 30,50 * row + 25));
+            }
+        }
 
 
         // set the drawing timer
@@ -169,7 +175,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             this.userspaceship.x += 10;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            shots.add(new Projectile(this.userspaceship.x, this.userspaceship.y - 21));
+            this.shots.add(new Projectile(this.userspaceship.x, this.userspaceship.y - 21));
         }
     }
 
@@ -177,20 +183,30 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void update() {
         this.userspaceship.update(this.canvasWidth, this.canvasHeight, this.frame);
-        for (Projectile projectiles : this.shots){
-            projectiles.update(this.canvasWidth, this.canvasHeight, this.frame);
+        for (int i = 0; i < this.shots.size(); i+=1) {
+            Projectile projectile = this.shots.get(i);
+            projectile.update(this.canvasWidth, this.canvasHeight, this.frame);
+            if (projectile.check() == true){
+                this.shots.remove(i);
+            }
+        for (Enemies enemies : this.badGuys){
+            enemies.update(this.canvasWidth, this.canvasHeight, this.frame);
         }
-        
+        destroyEnemy();
         // FIXME update game objects here
+        }
     }
 
-   /* private void destroyEnemy() {
-        for (Projectile projectile : this.shots) {
-            if (projectile.y == this.enemies.y) {
-
+   private void destroyEnemy() {
+        for (int projectileIndex = 0; projectileIndex < this.shots.size(); projectileIndex++) {
+            for (int badGuyIndex = 0; badGuyIndex < this.badGuys.size(); badGuyIndex++) {
+                if (((this.shots.get(projectileIndex).y < this.badGuys.get(badGuyIndex).y + 5) && (this.shots.get(projectileIndex).y > this.badGuys.get(badGuyIndex).y))
+                        && ((this.shots.get(projectileIndex).x < this.badGuys.get(badGuyIndex).x + 15) && (this.shots.get(projectileIndex).x > this.badGuys.get(badGuyIndex).x - 15))) {
+                    this.badGuys.remove(badGuyIndex);
+                }
             }
         }
-    }*/
+    }
 
     /* Check if the player has lost the game
      *
@@ -217,7 +233,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         for (Projectile projectiles : this.shots){
             projectiles.draw(g);
         }
-        for (Enemies enemies : this.enemies);{
+        for (Enemies enemies : this.badGuys){
             enemies.draw(g);
         }
         // FIXME draw game objects here

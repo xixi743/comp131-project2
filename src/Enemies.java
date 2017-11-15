@@ -1,9 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 public class Enemies extends GraphicsObject {
 
     public Enemies(int x, int y) {
