@@ -13,7 +13,11 @@ public class Enemies extends GraphicsObject {
         g.fillRect(this.x, this.y, 20, 20);
     }
 
-    //overriding with this.y change
+    public void moveRight() {
+        this.x += 5;
+    }
+
+
     public void update(int pic_width, int pic_height, int frame) {
     }
 }
