@@ -12,6 +12,8 @@ public class Projectile extends GraphicsObject {
         g.setColor(new Color(19, 219, 43));
         g.fillRect((x + 8 ), (y + 21), 5, 8);
     }
+
+    //overriding with this.y change
     public void update(int pic_width, int pic_height, int frame) {
         this.y -= 5;
     }
@@ -23,6 +25,5 @@ public class Projectile extends GraphicsObject {
             return false;
         }
     }
-
 }
 
