@@ -10,7 +10,7 @@ public class LosingEndScreen extends GraphicsObject {
     @Override
     public void draw (Graphics g) {
         //background
-        g.setColor(new Color(0,0,0));
+        g.setColor(Color.pink);
         g.fillRect(0,0,600,400);
 
         //GAME OVER
