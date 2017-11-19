@@ -44,10 +44,12 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
     private Timer timer;
     private int frame = 0;
     private ArrayList<Shape> objects;
-    private LosingEndScreen gameover;
+    private LosingEndScreen gameOver;
     private UserSpaceship userspaceship;
     private ArrayList<Projectile> shots;
     private ArrayList<Enemies> badGuys;
+    private WinScreen youWin;
+
 
     // FIXME list your game objects here
 
@@ -60,7 +62,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
         this.backgroundColor = Color.black;
         setPreferredSize(new Dimension(this.canvasWidth, this.canvasHeight));
         this.objects = new ArrayList<Shape>();
-        this.gameover = new LosingEndScreen(0, 0);
+        this.gameOver = new LosingEndScreen(0, 0);
         this.userspaceship = new UserSpaceship(280, 380);
         this.shots = new ArrayList<Projectile>();
         this.badGuys = new ArrayList<Enemies>();
@@ -254,6 +256,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void paintWinScreen(Graphics g) {
         // FIXME draw the win screen here
+        this.youWin.draw(g);
+        new WinScreen(0,0);
     }
 
     /* Paint the screen when the player has lost
@@ -262,7 +266,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      */
     private void paintLoseScreen(Graphics g) {
         // FIX ME
-        this.gameover.draw(g);
+        this.gameOver.draw(g);
         new LosingEndScreen(0, 0);
     }
 
