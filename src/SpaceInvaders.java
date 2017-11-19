@@ -194,12 +194,13 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
             }
         }
         for (Enemies enemies : this.badGuys) {
-            if (enemies.x < 580) {
-                enemies.moveRight();
-            } else {
-                enemies.x = 0;
-            }
             enemies.update(this.canvasWidth, this.canvasHeight, this.frame);
+            //if (enemies.x < 580) {
+                //enemies.moveRight();
+            //} else {
+                //enemies.x = 0;
+            //}
+            //enemies.update(this.canvasWidth, this.canvasHeight, this.frame);
         }
         destroyEnemy();
         // FIXME update game objects here
